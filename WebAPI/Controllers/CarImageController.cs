@@ -1,25 +1,23 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ColorsController : ControllerBase
+    public class CarImageController : ControllerBase
     {
-        IColorService _colorService;
-
-        public ColorsController(IColorService colorService)
+        ICarImageService _carImageService;
+        public CarImageController(ICarImageService carImageService)
         {
-            _colorService = colorService;
+            _carImageService = carImageService;
         }
 
         [HttpGet("add")]
-        public IActionResult Add(Color color)
+        public IActionResult Add(CarImage carImage)
         {
-            var result = _colorService.Add(color);
+            var result = _carImageService.Add(carImage);
             if (result.Success)
             {
                 return Ok(result);
@@ -28,9 +26,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("delete")]
-        public IActionResult Delete(Color color)
+        public IActionResult Delete(CarImage carImage)
         {
-            var result = _colorService.Delete(color);
+            var result = _carImageService.Delete(carImage);
             if (result.Success)
             {
                 return Ok(result);
@@ -39,9 +37,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("Update")]
-        public IActionResult Update(Color color)
+        public IActionResult Update(CarImage carImage)
         {
-            var result = _colorService.Update(color);
+            var result = _carImageService.Update(carImage);
             if (result.Success)
             {
                 return Ok(result);
@@ -52,18 +50,7 @@ namespace WebAPI.Controllers
         [HttpPost("getall")]
         public IActionResult GetAll()
         {
-            var result = _colorService.GetAll();
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-        [HttpPost("getbyid")]
-        public IActionResult GetById(int id)
-        {
-            var result = _colorService.GetById(id);
+            var result = _carImageService.GetAll();
             if (result.Success)
             {
                 return Ok(result);

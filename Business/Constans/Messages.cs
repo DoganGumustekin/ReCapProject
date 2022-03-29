@@ -35,5 +35,10 @@ namespace Business.Constans
         public static string CustomerDeleted = "Müşteri Silindi";
         public static string CustomerUpdated = "Müşteri Güncellendi";
         public static string RentalInvalid = "kiralama başarısız bu araç başkasına kiralı";
+        public static string CarImageAdded = "Resim eklendi";
+        public static string CarImageDeleted = "Resim Silindi";
+        public static string CarImageUpdated = "Resim Güncellendi";
+        public static string CarImageLimitExceded = "Bir arabanın en fazla 5 adet resmi bulunabilir resim eklenemiyor.";
+        
     }
 }
