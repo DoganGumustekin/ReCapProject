@@ -33,11 +33,7 @@ namespace Core.Utilities.Helpers.FileHelper
             {
                 if (!Directory.Exists(root)) //CarImageManager den sana bir adres gönderdim
                 {
-                    Directory.CreateDirectory(root); //pathconstans.imagespath bunun içinde bir str adresi ve dizin ifadesi var 
-                                                     //o adres yükleyeceğim dosyanın kayıt edileceği adres. 
-                                                     //*Check if a directory Exists* ifadesi şunu belirtiyor
-                                                     //dosyanın kaydedileceği adres dizini varmı yoksa dizin oluştur.
-                                                     //varsa da if e girme alttaki kodları oku.
+                    Directory.CreateDirectory(root);                                   
                 }
                 string extension = Path.GetExtension(file.FileName); //Yükleyeceğimiz dosyanın uzantısını alır. Örn: .jpg
                 string guid = Guid.NewGuid().ToString(); //Dosyanın yeni random ismi(GUID) elde edilir.
@@ -45,9 +41,10 @@ namespace Core.Utilities.Helpers.FileHelper
 
                 using (FileStream fileStream = File.Create(root + filePath))
                 {
-                    file.CopyTo(fileStream);
-                    fileStream.Flush();
-                    return filePath;
+                    file.CopyTo(fileStream);//Kopyalanacak dosyanın kopyalanacağı akışı belirtti. yani yukarıda gelen 
+                                            //IFromFile türündeki file dosyasınınnereye kopyalacağını söyledik.
+                    fileStream.Flush();     //arabellekten siler.
+                    return filePath;//burada dosyamızın tam adını geri gönderiyoruz sebebide sql servere dosya eklenirken adı ile eklenmesi için.
                 }
             }
             return null;

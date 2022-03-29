@@ -15,9 +15,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("add")]
-        public IActionResult Add(CarImage carImage)
+        public IActionResult Add([FromForm] IFormFile file, [FromForm] CarImage carImage)
         {
-            var result = _carImageService.Add(carImage);
+            var result = _carImageService.Add(file, carImage);
             if (result.Success)
             {
                 return Ok(result);
@@ -28,7 +28,8 @@ namespace WebAPI.Controllers
         [HttpGet("delete")]
         public IActionResult Delete(CarImage carImage)
         {
-            var result = _carImageService.Delete(carImage);
+            var carDeleteImage = _carImageService.GetByImageId(carImage.Id).Data;
+            var result = _carImageService.Delete(carDeleteImage);
             if (result.Success)
             {
                 return Ok(result);
@@ -37,9 +38,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("Update")]
-        public IActionResult Update(CarImage carImage)
+        public IActionResult Update([FromForm] IFormFile file, [FromForm] CarImage carImage)
         {
-            var result = _carImageService.Update(carImage);
+            var result = _carImageService.Update(file, carImage);
             if (result.Success)
             {
                 return Ok(result);
@@ -51,6 +52,28 @@ namespace WebAPI.Controllers
         public IActionResult GetAll()
         {
             var result = _carImageService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbycarıd")]
+        public IActionResult GetByCarId(int carId)
+        {
+            var result = _carImageService.GetByCarId(carId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("getbyimageid")]
+        public IActionResult GetByImageId(int imageId)
+        {
+            var result = _carImageService.GetByImageId(imageId);
             if (result.Success)
             {
                 return Ok(result);

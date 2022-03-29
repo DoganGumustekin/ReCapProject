@@ -15,6 +15,8 @@ namespace Business.Abstract
         IResult Add(IFormFile file, CarImage carImage); //IFormFile projemize bir dosya yüklemek için kulanılan yöntemdir, HttpRequest ile gönderilen bir dosyayı temsil eder.
         IResult Delete(CarImage carImage);
         IResult Update(IFormFile file, CarImage carImage);
-
+        IDataResult<List<CarImage>> GetAll();
+        IDataResult<List<CarImage>> GetByCarId(int carId);
+        IDataResult<CarImage> GetByImageId(int imageId);
     }
 }
